@@ -104,6 +104,10 @@ async function crossover(image, webImage, id, color){
     }
 
     await loadedImage1.write(output);
+
+    delete loadedImage1
+
+    delete loadedImage2
 }
 
 async function webpToJimp (url, tempDir) {
