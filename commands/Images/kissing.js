@@ -76,7 +76,7 @@ async function crossover(image, webImage, id, color){
 
     console.log(webImage)
 
-    const loadedImage2 = await webpToJimp(webImage,"tmp" + id.toString())
+    const loadedImage2 = await webpToJimp(webImage,"tmp/" + id.toString())
 
     loadedImage2.resize({
         w : loadedImage1.bitmap.width,
@@ -104,10 +104,6 @@ async function crossover(image, webImage, id, color){
     }
 
     await loadedImage1.write(output);
-
-    delete loadedImage1
-
-    delete loadedImage2
 }
 
 async function webpToJimp (url, tempDir) {
@@ -115,7 +111,7 @@ async function webpToJimp (url, tempDir) {
 
     if (!url.match(/(\.webp)/gi)) return Jimp.read(url)
 
-    fs.mkdirSync(tempDir)
+    fs.mkdirSync(tempDir, {recursive : true})
 
     // Get the webp image
     const response = await axios.get(url, {
