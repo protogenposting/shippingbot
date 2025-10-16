@@ -110,31 +110,32 @@ async function webpToJimp (url, tempDir) {
     // Verify that the img is a webp
 
     if (!url.match(/(\.webp)/gi)) return Jimp.read(url)
-        fs.mkdirSync(tempDir)
 
-        // Get the webp image
-        const response = await axios.get(url, {
-            responseType: 'stream'
-        })
+    fs.mkdirSync(tempDir)
 
-        // Create the temporary directory if it doesn't exist
-        await fs.promises.mkdir(tempDir, { recursive: true })
+    // Get the webp image
+    const response = await axios.get(url, {
+        responseType: 'stream'
+    })
 
-        // Create a stream at the temporary directory and load the data into it
-        const file = fs.createWriteStream(`${tempDir}/tmp.webp`)
-        await response.data.pipe(file)
+    // Create the temporary directory if it doesn't exist
+    await fs.promises.mkdir(tempDir, { recursive: true })
 
-        await sleep(2000)
+    // Create a stream at the temporary directory and load the data into it
+    const file = fs.createWriteStream(`${tempDir}/tmp.webp`)
+    await response.data.pipe(file)
 
-        await sharp(`${tempDir}/tmp.webp`)
-            .png() // Specify the output format as PNG
-            .toFile(`${tempDir}/tmp.png`);
+    await sleep(2000)
 
-        const img = await Jimp.read(`${tempDir}/tmp.png`)
+    await sharp(`${tempDir}/tmp.webp`)
+        .png() // Specify the output format as PNG
+        .toFile(`${tempDir}/tmp.png`);
 
-        fs.rmSync(tempDir, { recursive: true, force: true });
+    const img = await Jimp.read(`${tempDir}/tmp.png`)
 
-        return img
+    fs.rmSync(tempDir, { recursive: true, force: true });
+
+    return img
 }
 
 function sleep(ms) {
