@@ -21,9 +21,9 @@ module.exports = {
         .addUserOption(option =>
             option.setName('target2')
             .setDescription(':3333')
-            .setRequired(true)),
+            .setRequired(true))
         .addStringOption('message')
-            .setDescription('message you want')
+            .setDescription('message you want'),
     async execute(interaction) {
         // interaction.user is the object representing the User who ran the command
         // interaction.member is the GuildMember object, which represents the user in the specific guild
