@@ -64,7 +64,7 @@ module.exports = {
 
         await interaction.editReply(
             {
-                content: "\"listen here " + targetUsers[1].username + ", " + interaction.options.getString('message') + "\" -"targetUsers[1].username,
+                content: "\"listen here " + targetUsers[1].username + ", " + interaction.options.getString('message') + "\" -" + targetUsers[0].username,
                 files: [attachment]
             }
         );
