@@ -21,7 +21,9 @@ module.exports = {
 
         let response = await fetch(dataLink)
 
-        console.log(response)
+        parsedResponse = response.json()
+
+        console.log(parsedResponse)
 
         let file = new Jimp({
             width: 32 * 5,
@@ -35,7 +37,7 @@ module.exports = {
 
         await interaction.editReply(
             {
-                response,
+                parsedResponse,
                 files: [attachment]
             }
         );
