@@ -27,7 +27,7 @@ module.exports = {
             color: 0xffffffff,
         });
 
-        await jimp.write(output)
+        await file.write(output)
 
         const attachment = new AttachmentBuilder(output, { name: "file.png" });
 
