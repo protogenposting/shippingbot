@@ -21,6 +21,8 @@ module.exports = {
 
         let response = await fetch(dataLink)
 
+        console.log response
+
         let file = new Jimp({
             width: 32 * 5,
             height: 32,
