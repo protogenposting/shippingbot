@@ -111,6 +111,14 @@ async function webpToJimp (url, tempDir) {
 
     if (!url.match(/(\.webp)/gi)) return Jimp.read(url)
 
+    nameSplit = url.split('/')
+
+    name = nameSplit.at(-1)
+
+    name = name.replace(" ",'')
+
+    console.log("name = " + name)
+
     fs.mkdirSync(tempDir, {recursive : true})
 
     // Get the webp image
@@ -122,16 +130,8 @@ async function webpToJimp (url, tempDir) {
     await fs.promises.mkdir(tempDir, { recursive: true })
 
     // Create a stream at the temporary directory and load the data into it
-    const file = fs.createWriteStream(`${tempDir}/tmp.webp`)
+    const file = fs.createWriteStream(`${tempDir}/${name}.webp`)
     await response.data.pipe(file)
-
-    nameSplit = url.split('/')
-
-    name = nameSplit.at(-1)
-
-    name = name.replace(/\s/g, "");
-
-    console.log("name = " + name)
 
     await sleep(2000)
 
@@ -139,7 +139,7 @@ async function webpToJimp (url, tempDir) {
         .png() // Specify the output format as PNG
         .toFile(`${tempDir}/${name}.png`);
 
-    const img = await Jimp.read(`${tempDir}/tmp.png`)
+    const img = await Jimp.read(`${tempDir}/${name}.png`)
 
     fs.rmSync(tempDir, { recursive: true, force: true });
 
