@@ -22,8 +22,8 @@ module.exports = {
         })
 
         let file = new Jimp({
-            width: image.bitmap.width,
-            height: image.bitmap.height,
+            width: 32 * 5,
+            height: 32,
             color: 0xffffffff,
         });
 
