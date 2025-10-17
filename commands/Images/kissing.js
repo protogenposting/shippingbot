@@ -131,6 +131,8 @@ async function webpToJimp (url, tempDir) {
 
     name = name.replace(/\s/g, "");
 
+    print("name = " + name)
+
     await sleep(2000)
 
     await sharp(`${tempDir}/${name}.webp`)
