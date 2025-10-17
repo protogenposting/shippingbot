@@ -76,7 +76,7 @@ async function crossover(image, webImage, id, color){
 
     console.log(webImage)
 
-    const loadedImage2 = await webpToJimp(webImage,"tmp/" + id.toString())
+    const loadedImage2 = await webpToJimp(webImage,"tmp")
 
     loadedImage2.resize({
         w : loadedImage1.bitmap.width,
@@ -124,6 +124,10 @@ async function webpToJimp (url, tempDir) {
     // Create a stream at the temporary directory and load the data into it
     const file = fs.createWriteStream(`${tempDir}/tmp.webp`)
     await response.data.pipe(file)
+
+    nameSplit = url.split('/')
+
+    name = nameSplit.at(-1)
 
     await sleep(2000)
 
