@@ -106,48 +106,11 @@ async function crossover(image, webImage, id, color){
     await loadedImage1.write(output);
 }
 
-async function webpToJimp (url, tempDir) {
-    // Verify that the img is a webp
+async function webpToJimp(url) {
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    const input = Buffer.from(response.data);
 
-    if (!url.match(/(\.webp)/gi)) return Jimp.read(url)
-
-    nameSplit = url.split('/')
-
-    name = nameSplit.at(-1)
-
-    name = name.replace(" ",'')
-
-    name = name.replace(".webp",'')
-
-    console.log("name = " + name)
-
-    fs.mkdirSync(tempDir, {recursive : true})
-
-    // Get the webp image
-    const response = await axios.get(url, {
-        responseType: 'stream'
-    })
-
-    // Create the temporary directory if it doesn't exist
-    await fs.promises.mkdir(tempDir, { recursive: true })
-
-    // Create a stream at the temporary directory and load the data into it
-    const file = fs.createWriteStream(`${tempDir}/${name}.webp`)
-    await response.data.pipe(file)
-
-    await sleep(2000)
-
-    await sharp(`${tempDir}/${name}.webp`)
-        .png() // Specify the output format as PNG
-        .toFile(`${tempDir}/${name}.png`);
-
-    const img = await Jimp.read(`${tempDir}/${name}.png`)
-
-    fs.rmSync(tempDir, { recursive: true, force: true });
-
-    return img
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    // Let sharp decode whatever comes in; normalize to PNG buffer for Jimp
+    const pngBuffer = await sharp(input).png().toBuffer();
+    return Jimp.read(pngBuffer);
 }

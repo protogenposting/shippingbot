@@ -8,7 +8,7 @@ const output = "./output.png"
 
 const fs = require('fs');
 
-const {fetchSync} = require('@jcbhmr/fetch-sync');
+const http = require('http');
 
 const dataLink = "http://24.199.91.149:3000/api/dailyScore"
 
@@ -21,11 +21,16 @@ module.exports = {
         // interaction.member is the GuildMember object, which represents the user in the specific guild
         await interaction.deferReply({ ephemeral: false });
 
-        let response = fetchSync(dataLink)
+        let response = await axios.get(dataLink)
 
-        parsedResponse = response.json()
+        console.log(response.data)
 
-        console.log(parsedResponse)
+        if (response.data.name == "")
+        {
+            await interaction.editReply("no score set yet!");
+
+            //return
+        }
 
         let file = new Jimp({
             width: 32 * 5,
@@ -33,13 +38,34 @@ module.exports = {
             color: 0x000000ff,
         });
 
+        offset = 0
+
+        for (let i = 0; i < response.data.deck.length; i++)
+        {
+            console.log(response.data.deck)
+
+            let note = response.data.deck[i]
+
+            let image = await Jimp.read("commands/RogueRhythms/NoteImages/note" + note + ".png")
+
+            file.scan((x, y) => {
+                const color = image.getPixelColor(x, y);
+                console.log(intToRGBA(color)); // prints: { r: 1, g: 255, b: 0, a: 255 }
+                file.setPixelColor(color, x + offset, y);
+            });
+
+            offset += 32
+        }
+
         await file.write(output)
 
-        const attachment = new AttachmentBuilder(output, { name: "file.png" });
+        let attachment = new AttachmentBuilder(output, { name: "file.png" });
+
+        let text = "Score is currntly held by " + response.data.name + " with "  + response.data.score + " accuracy!"
 
         await interaction.editReply(
             {
-                parsedResponse,
+                text,
                 files: [attachment]
             }
         );
