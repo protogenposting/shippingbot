@@ -131,7 +131,7 @@ async function webpToJimp (url, tempDir) {
 
     name = name.replace(/\s/g, "");
 
-    print("name = " + name)
+    console.log("name = " + name)
 
     await sleep(2000)
 
