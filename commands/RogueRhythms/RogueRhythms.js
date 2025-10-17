@@ -19,9 +19,7 @@ module.exports = {
         // interaction.member is the GuildMember object, which represents the user in the specific guild
         await interaction.deferReply({ ephemeral: false });
 
-        let response = await axios.get(dataLink, {
-            responseType: 'stream'
-        })
+        let response = await fetch(dataLink)
 
         let file = new Jimp({
             width: 32 * 5,
