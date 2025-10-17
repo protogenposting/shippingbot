@@ -129,6 +129,8 @@ async function webpToJimp (url, tempDir) {
 
     name = nameSplit.at(-1)
 
+    name = name.replace(/\s/g, "");
+
     await sleep(2000)
 
     await sharp(`${tempDir}/${name}.webp`)
