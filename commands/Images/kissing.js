@@ -117,6 +117,8 @@ async function webpToJimp (url, tempDir) {
 
     name = name.replace(" ",'')
 
+    name = name.replace(".webp",'')
+
     console.log("name = " + name)
 
     fs.mkdirSync(tempDir, {recursive : true})
