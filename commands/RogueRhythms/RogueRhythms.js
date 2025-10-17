@@ -6,6 +6,8 @@ const axios = require('axios');
 
 const output = "./output.png"
 
+const fs = require('fs');
+
 const dataLink = "http://24.199.91.149:3000/api/dailyScore"
 
 module.exports = {
@@ -24,7 +26,7 @@ module.exports = {
         let file = new Jimp({
             width: 32 * 5,
             height: 32,
-            color: 0xffffffff,
+            color: 0x000000ff,
         });
 
         await file.write(output)
