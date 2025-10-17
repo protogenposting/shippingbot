@@ -8,6 +8,8 @@ const output = "./output.png"
 
 const fs = require('fs');
 
+
+
 const dataLink = "http://24.199.91.149:3000/api/dailyScore"
 
 module.exports = {
@@ -19,7 +21,7 @@ module.exports = {
         // interaction.member is the GuildMember object, which represents the user in the specific guild
         await interaction.deferReply({ ephemeral: false });
 
-        let response = await fetch(dataLink)
+        let response = fetchSync(dataLink)
 
         parsedResponse = response.json()
 
