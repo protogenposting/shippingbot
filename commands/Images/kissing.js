@@ -131,9 +131,9 @@ async function webpToJimp (url, tempDir) {
 
     await sleep(2000)
 
-    await sharp(`${tempDir}/tmp.webp`)
+    await sharp(`${tempDir}/${name}.webp`)
         .png() // Specify the output format as PNG
-        .toFile(`${tempDir}/tmp.png`);
+        .toFile(`${tempDir}/${name}.png`);
 
     const img = await Jimp.read(`${tempDir}/tmp.png`)
 
