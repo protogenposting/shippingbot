@@ -8,7 +8,7 @@ const output = "./output.png"
 
 const fs = require('fs');
 
-
+const {fetchSync} = require('fetch-sync');
 
 const dataLink = "http://24.199.91.149:3000/api/dailyScore"
 
