@@ -61,11 +61,13 @@ module.exports = {
 
         let attachment = new AttachmentBuilder(output, { name: "file.png" });
 
-        let text = "Score is currntly held by " + response.data.name + " with "  + response.data.score + " accuracy!"
+        let text = "Score is currently held by " + response.data.name + " with "  + response.data.score + " accuracy!"
+
+        console.log(text)
 
         await interaction.editReply(
             {
-                text,
+                content: text,
                 files: [attachment]
             }
         );
