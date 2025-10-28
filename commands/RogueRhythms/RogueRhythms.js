@@ -10,6 +10,10 @@ const fs = require('fs');
 
 const http = require('http');
 
+const extract = require('extract-zip')
+
+const path = require('path');
+
 const dataLink = "http://24.199.91.149:3000/api/dailyScore"
 
 const dailyLink = "http://24.199.91.149:3000/api/daily"
@@ -52,7 +56,6 @@ module.exports = {
 
             file.scan((x, y) => {
                 const color = image.getPixelColor(x, y);
-                console.log(intToRGBA(color)); // prints: { r: 1, g: 255, b: 0, a: 255 }
                 file.setPixelColor(color, x + offset, y);
             });
 
@@ -61,24 +64,60 @@ module.exports = {
 
         await file.write(output)
 
-        //get song data
-        const dailyResponse = await axios.get(dailyLink, { responseType: 'arraybuffer' });
-        const fileData = Buffer.from(response.data, 'binary');
-        await fs.writeFile('./daily.zip', fileData);
+        await downloadFileSync(dailyLink,"daily.zip")
+
+        try{
+            fs.mkdirSync("daily")
+        }
+        catch(e){
+
+        }
+
+
+        await extract("daily.zip", { dir: path.resolve("dailytmp") })
 
         let attachment = new AttachmentBuilder(output, { name: "file.png" });
 
+        let song = new AttachmentBuilder(output, { name: "dailytmp/daily/song.ogg" });
+
         let text = "Score is currently held by " + response.data.name + " with "  + response.data.score + " accuracy!"
 
-        console.log(text)
+        let jsonText = fs.readFileSync("dailytmp/daily/data.json", 'utf8').slice(0, -1)
+
+        let songJSON = JSON.parse(jsonText)
+
+        let furthestNote = songJSON.song.notes.at(-1).sectionNotes.at(-1)[0]
+
+        text = text + "\n\nThe current song is " + (furthestNote / 1000).toString() + " seconds long! get on it!"
+
+        console.log("total time: " + furthestNote.toString())
 
         await interaction.editReply(
             {
                 content: text,
-                files: [attachment]
+                files: [attachment, song]
             }
         );
 
         fs.unlink(output, () => {})
+
+        fs.unlink("daily.zip", () => {})
+
+        fs.rmdirSync("daily",{ recursive: true, force: true })
     },
 };
+
+async function downloadFileSync(url, destinationPath) {
+    try {
+        const response = await axios({
+            method: 'get',
+            url: url,
+            responseType: 'arraybuffer' // Get response as a buffer
+        });
+
+        fs.writeFileSync(destinationPath, response.data);
+        console.log(`File downloaded synchronously to ${destinationPath}`);
+    } catch (error) {
+        console.error('Error downloading file synchronously:', error);
+    }
+}
