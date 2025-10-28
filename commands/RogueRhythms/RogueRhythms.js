@@ -78,7 +78,7 @@ module.exports = {
 
         let attachment = new AttachmentBuilder(output, { name: "file.png" });
 
-        let song = new AttachmentBuilder(output, { name: "dailytmp/daily/song.ogg" });
+        let song = new AttachmentBuilder("dailytmp/daily/song.ogg", { name: "song.ogg" });
 
         let text = "Score is currently held by " + response.data.name + " with "  + response.data.score + " accuracy!"
 
