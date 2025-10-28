@@ -12,6 +12,8 @@ const http = require('http');
 
 const dataLink = "http://24.199.91.149:3000/api/dailyScore"
 
+const dailyLink = "http://24.199.91.149:3000/api/daily"
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('rrdailydata')
@@ -58,6 +60,11 @@ module.exports = {
         }
 
         await file.write(output)
+
+        //get song data
+        const response = await axios.get(dailyLink, { responseType: 'arraybuffer' });
+        const fileData = Buffer.from(response.data, 'binary');
+        await fs.writeFile('./daily.zip', fileData);
 
         let attachment = new AttachmentBuilder(output, { name: "file.png" });
 
