@@ -62,7 +62,7 @@ module.exports = {
         await file.write(output)
 
         //get song data
-        const response = await axios.get(dailyLink, { responseType: 'arraybuffer' });
+        const dailyResponse = await axios.get(dailyLink, { responseType: 'arraybuffer' });
         const fileData = Buffer.from(response.data, 'binary');
         await fs.writeFile('./daily.zip', fileData);
 
