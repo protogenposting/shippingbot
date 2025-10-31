@@ -83,7 +83,12 @@ module.exports = {
 
         let text = "Score is currently held by " + response.data.name + " with "  + response.data.score + " accuracy!"
 
-        let jsonText = fs.readFileSync(directory + "/data.json", 'utf8').slice(0, -1)
+        let jsonText = fs.readFileSync(directory + "/data.json", 'utf8')
+
+        if (jsonText.slice(-1) != "}")
+        {
+            jsonText = jsonText.slice(0, -1)
+        }
 
         let songJSON = JSON.parse(jsonText)
 
