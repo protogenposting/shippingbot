@@ -67,7 +67,7 @@ module.exports = {
         await downloadFileSync(dailyLink,"daily.zip")
 
         try{
-            fs.mkdirSync("daily")
+            fs.mkdirSync("dailytmp")
         }
         catch(e){
 
@@ -75,13 +75,15 @@ module.exports = {
 
         await extract("daily.zip", { dir: path.resolve("dailytmp") })
 
+        let directory = "dailytmp/" + getSubdirectories("dailytmp")[0]
+
         let attachment = new AttachmentBuilder(output, { name: "file.png" });
 
-        let song = new AttachmentBuilder("dailytmp/daily/song.ogg", { name: "song.ogg" });
+        let song = new AttachmentBuilder(directory + "/daily/song.ogg", { name: "song.ogg" });
 
         let text = "Score is currently held by " + response.data.name + " with "  + response.data.score + " accuracy!"
 
-        let jsonText = fs.readFileSync("dailytmp/daily/data.json", 'utf8').slice(0, -1)
+        let jsonText = fs.readFileSync(directory + "/daily/data.json", 'utf8').slice(0, -1)
 
         let songJSON = JSON.parse(jsonText)
 
@@ -105,6 +107,14 @@ module.exports = {
         fs.rmdirSync("dailytmp",{ recursive: true, force: true })
     },
 };
+
+function getSubdirectories(source) => {
+    const directories = fs.readdirSync(source, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+    return directories;
+};
+
 
 async function downloadFileSync(url, destinationPath) {
     try {
