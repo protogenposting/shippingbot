@@ -73,7 +73,6 @@ module.exports = {
 
         }
 
-
         await extract("daily.zip", { dir: path.resolve("dailytmp") })
 
         let attachment = new AttachmentBuilder(output, { name: "file.png" });
@@ -103,7 +102,7 @@ module.exports = {
 
         fs.unlink("daily.zip", () => {})
 
-        fs.rmdirSync("daily",{ recursive: true, force: true })
+        fs.rmdirSync("dailytmp",{ recursive: true, force: true })
     },
 };
 
