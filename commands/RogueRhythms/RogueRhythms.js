@@ -108,7 +108,7 @@ module.exports = {
     },
 };
 
-function getSubdirectories(source) => {
+function getSubdirectories(source){
     const directories = fs.readdirSync(source, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
