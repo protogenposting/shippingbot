@@ -14,6 +14,8 @@ const extract = require('extract-zip')
 
 const path = require('path');
 
+const { rimraf, rimrafSync, native, nativeSync } = require('rimraf')
+
 const dataLink = "http://24.199.91.149:3000/api/dailyScore"
 
 const dailyLink = "http://24.199.91.149:3000/api/daily"
@@ -92,7 +94,23 @@ module.exports = {
 
         let songJSON = JSON.parse(jsonText)
 
-        let furthestNote = songJSON.song.notes.at(-1).sectionNotes.at(-1)[0]
+        let notePosition = -1
+
+        let note = undefined
+
+        while (note == undefined)
+        {
+            note = songJSON.song.notes.at(notePosition)
+
+            if (note.sectionNotes.length <= 0)
+            {
+                note = undefined
+            }
+
+            notePosition -= 1
+        }
+
+        let furthestNote = note.sectionNotes.at(-1)[0]
 
         text = text + "\n\nThe current song is " + (furthestNote / 1000).toString() + " seconds long! get on it!"
 
@@ -109,7 +127,7 @@ module.exports = {
 
         fs.unlink("daily.zip", () => {})
 
-        fs.rmdirSync("dailytmp",{ recursive: true, force: true })
+        rimraf.sync("dailytmp")
     },
 };
 
