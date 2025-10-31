@@ -79,11 +79,11 @@ module.exports = {
 
         let attachment = new AttachmentBuilder(output, { name: "file.png" });
 
-        let song = new AttachmentBuilder(directory + "/daily/song.ogg", { name: "song.ogg" });
+        let song = new AttachmentBuilder(directory + "/song.ogg", { name: "song.ogg" });
 
         let text = "Score is currently held by " + response.data.name + " with "  + response.data.score + " accuracy!"
 
-        let jsonText = fs.readFileSync(directory + "/daily/data.json", 'utf8').slice(0, -1)
+        let jsonText = fs.readFileSync(directory + "/data.json", 'utf8').slice(0, -1)
 
         let songJSON = JSON.parse(jsonText)
 
