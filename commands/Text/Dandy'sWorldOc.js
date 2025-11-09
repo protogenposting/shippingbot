@@ -130,7 +130,9 @@ function ability()
         "permenantly distract a twisted and lose one",
         "side with rox then lose one",
         "spray paint the wall, do a backflip 10 miles away from any enemies, then get one",
-        "do bad game design at the cost of one"
+        "do bad game design at the cost of one",
+        "be gay and get one",
+        "go exe mode and destroy all"
     ]
 
     end = [
@@ -139,7 +141,14 @@ function ability()
         "tapes.",
         "research.",
         "stat boost",
-        "heart"
+        "heart",
+        "bfdi",
+        "15% stat boost",
+        "reddit karma",
+        "jojo siwa",
+        "Mabel OCC",
+        "crusty jpeg of dandy",
+        "twisted behind them"
     ]
 
     return start[getRandomInt(0,start.length)] + " " + middle[getRandomInt(0,middle.length)] + " " + end[getRandomInt(0,end.length)]
