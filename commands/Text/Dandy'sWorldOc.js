@@ -47,7 +47,9 @@ module.exports = {
         {
             for (i = 0; i < 5; i++)
             {
-                let newStat = getRandomInt(0,1)
+                let newStat = getRandomInt(0,2)
+
+                console.log(statTotal)
 
                 statTotal -= newStat
 
