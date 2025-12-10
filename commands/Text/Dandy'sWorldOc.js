@@ -71,15 +71,15 @@ module.exports = {
             }
         }
 
-        text = "This is my new oc, " + name + "! \nTheir stats are so cool, take a look!"
+        text = "Introducing the NEW DW TOON! " + name + "! \ [Stats]"
 
         if (isMain)
         {
-            text = text + "\nhealth: 2"
+            text = text + "\nHP: 2"
         }
         else
         {
-            text = text + "\nhealth: 3"
+            text = text + "\nHP: 3"
         }
 
         statNames = [
@@ -95,7 +95,7 @@ module.exports = {
             text = text + "\n" + statNames[i] + ": " + stats[i].toString()
         }
 
-        text = text + "\nTheir abilities are also cool! Look!!!!!!"
+        text = text + "\n[Traits!]"
 
         text = text + "\n\n" + ability()
 
@@ -115,40 +115,35 @@ module.exports = {
 function ability()
 {
     start = [
-        "Upon a machine being completed, this toon will",
-        "On use this toon will",
-        "Every 1.5 seconds this toon will",
-        "On hit this toon will"
+        "Upon completing a Machine, this Toon will",
+        "Upon completing a Floor, this Toon will",
+        "Upon the start of the Floor, this Toon will",
+        "Upon the start of Panic Mode, this Toon will",
+        "Upon picking up a Tape, this Toon will",
+        "Upon picking up an item, this Toon will",
+        "Upon picking up a Research Capsule, this Toon will",
+        "Upon picking up a Tape, this Toon will",
+        "On hit, this Toon will",
+        "On use, this Toon will",
+        "Overtime, this Toon will",
+        "On hit this Toon will"
+        "Upon being noticed by a Twisted, this Toon will",
     ]
 
     middle = [
-        "gain a random",
-        "get a free",
-        "stun a twisted and get one",
-        "randomly get a",
-        "lose one",
-        "permenantly distract a twisted and lose one",
-        "side with rox then lose one",
-        "spray paint the wall, do a backflip 10 miles away from any enemies, then get one",
-        "do bad game design at the cost of one",
-        "be gay and get one",
-        "go exe mode and destroy all"
+        "gain a",
+        "lose a ",
     ]
 
     end = [
-        "item.",
-        "speed boost.",
-        "tapes.",
-        "research.",
-        "stat boost",
-        "heart",
-        "bfdi",
-        "15% stat boost",
-        "reddit karma",
-        "jojo siwa",
-        "Mabel OCC",
-        "crusty jpeg of dandy",
-        "twisted behind them"
+        "random item.",
+        "random stat debuff.",
+        "random stat buff.",
+        "portion of Stamina.",
+        "Tape.",
+        "Research Capsule.",
+        "single ❤︎"
+
     ]
 
     return start[getRandomInt(0,start.length)] + " " + middle[getRandomInt(0,middle.length)] + " " + end[getRandomInt(0,end.length)]
