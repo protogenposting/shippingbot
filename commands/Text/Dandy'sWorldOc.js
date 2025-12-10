@@ -166,8 +166,6 @@ function ability()
 
     ]
 
-    ]
-
     bonus = [
         ".",
         ", lasting only for that Floor.",
