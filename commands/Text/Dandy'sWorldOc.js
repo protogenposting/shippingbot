@@ -129,25 +129,54 @@ function ability()
         "Upon being noticed by a Twisted, this Toon will",
         "Overtime, this Toon will",
         "Once per Floor, this Toon will",
+        "By their SPECIAL FORM,",
+        "At the cost of Stamina, this Toon will",
+        "At the cost of some Tapes, this Toon will",
+        "At the cost of a single ❤︎, this Toon will",
     ]
 
     middle = [
         "gain a",
-        "lose a ",
+        "lose a",
+        "set down a building, which locates a",
+        "set down a building, which grants a",
+        "grant a nearby ally a",
+        "grant all nearby allies a",
     ]
 
     end = [
-        "random item.",
-        "random stat debuff.",
-        "random stat buff.",
-        "portion of Stamina.",
-        "Tape.",
-        "Research Capsule.",
+        "random item",
+        "Bandage",
+        "Medkit"
+        "random stat debuff",
+        "random stat buff",
+        "lowered Speedboost",
+        "higher Speedboost",
+        "lowered Skill Check",
+        "higher Skill Check",
+        "lower Stealth",
+        "higher Stealh",
+        "lower Extraction Speed",
+        "higher Extraction Speed",
+        "lower Max Stamina",
+        "higher Max Stamina",
+        "portion of Stamina",
+        "Tape",
         "single ❤︎"
 
     ]
 
-    return start[getRandomInt(0,start.length)] + " " + middle[getRandomInt(0,middle.length)] + " " + end[getRandomInt(0,end.length)]
+    ]
+
+    bonus = [
+        ".",
+        ", lasting only for that Floor.",
+        "permanently.",
+        "before setting this Toon to zero Stamina.",
+
+    ]
+
+    return start[getRandomInt(0,start.length)] + " " + middle[getRandomInt(0,middle.length)] + " " + end[getRandomInt(0,end.length)] + " " + bonus[getRandomInt(0,bonus.length)]
 }
 
 function getRandomInt(min, max) {
