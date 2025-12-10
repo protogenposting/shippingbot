@@ -147,7 +147,7 @@ function ability()
     end = [
         "random item",
         "Bandage",
-        "Medkit"
+        "Medkit",
         "random stat debuff",
         "random stat buff",
         "lowered Speedboost",
@@ -162,7 +162,7 @@ function ability()
         "higher Max Stamina",
         "portion of Stamina",
         "Tape",
-        "single ❤︎"
+        "single ❤︎",
 
     ]
 
