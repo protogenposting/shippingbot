@@ -125,9 +125,10 @@ function ability()
         "Upon picking up a Tape, this Toon will",
         "On hit, this Toon will",
         "On use, this Toon will",
-        "Overtime, this Toon will",
-        "On hit this Toon will"
+        "On hit this Toon will",
         "Upon being noticed by a Twisted, this Toon will",
+        "Overtime, this Toon will",
+        "Once per Floor, this Toon will",
     ]
 
     middle = [
